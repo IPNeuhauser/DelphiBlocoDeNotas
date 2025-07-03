@@ -24,10 +24,8 @@ object Form1: TForm1
     Align = alClient
     Color = clWhite
     TabOrder = 0
-    ExplicitLeft = 416
-    ExplicitTop = 312
-    ExplicitWidth = 185
-    ExplicitHeight = 89
+    ExplicitWidth = 733
+    ExplicitHeight = 537
   end
   object MainMenu1: TMainMenu
     Left = 496
@@ -41,6 +39,10 @@ object Form1: TForm1
       object Arquivo2: TMenuItem
         Caption = 'Abrir Arquivo'
         OnClick = Arquivo2Click
+      end
+      object Salvar1: TMenuItem
+        Caption = 'Salvar'
+        OnClick = Salvar1Click
       end
       object SalvarArquivo1: TMenuItem
         Caption = 'Salvar Arquivo'
@@ -60,10 +62,15 @@ object Form1: TForm1
     end
   end
   object SaveDialog1: TSaveDialog
+    DefaultExt = '*.txt'
+    FileName = 'Sem Titulo.txt'
+    Filter = 'txt|*.txt'
     Left = 568
     Top = 272
   end
   object OpenDialog1: TOpenDialog
+    DefaultExt = '*.txt'
+    Filter = 'txt|*.txt'
     Left = 648
     Top = 272
   end

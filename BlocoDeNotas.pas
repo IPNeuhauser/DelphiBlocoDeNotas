@@ -19,11 +19,13 @@ type
     Ajuda2: TMenuItem;
     SaveDialog1: TSaveDialog;
     OpenDialog1: TOpenDialog;
+    Salvar1: TMenuItem;
     procedure Ajuda2Click(Sender: TObject);
     procedure SalvarArquivo2Click(Sender: TObject);
     procedure SalvarArquivo1Click(Sender: TObject);
     procedure Arquivo2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
+    procedure Salvar1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,13 +63,28 @@ begin
 
 end;
 
+procedure TForm1.Salvar1Click(Sender: TObject);
+begin
+
+{Condição para garantir que o usuário salve e renomeie o arquivo uma primeira vez}
+
+  if SaveDialog1.filename = 'Sem Titulo.txt' then
+    begin
+      if SaveDialog1.execute then
+        CampoPreencher.lines.SaveToFile(SaveDialog1.FileName);
+    end
+  else
+    CampoPreencher.Lines.SaveToFile(SaveDialog1.FileName);
+
+
+end;
+
 procedure TForm1.SalvarArquivo1Click(Sender: TObject);
 begin
 
-  if SaveDialog1.Execute then
-  begin
-    CampoPreencher.lines.SaveToFile(SaveDialog1.FileName);
-  end;
+{ Removi o "Begin" e "End" para verificar como funciona o if com só uma linha de código }
+
+  if SaveDialog1.Execute then CampoPreencher.lines.SaveToFile(SaveDialog1.FileName);
 
 end;
 
