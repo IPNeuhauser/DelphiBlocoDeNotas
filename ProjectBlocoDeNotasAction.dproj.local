@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/07/03 16:24:22.000.895,=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/07/03 16:25:02.000.615,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\BlocoDeNotasAction.dfm</Transaction>
+    <Transaction>2025/07/03 16:25:02.000.615,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\BlocoDeNotasAction.pas</Transaction>
+    <Transaction>2025/07/03 16:25:16.000.002,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\ProjectBlocoDeNotasAction.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

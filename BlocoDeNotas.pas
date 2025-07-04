@@ -8,7 +8,6 @@ uses
 
 type
   TForm1 = class(TForm)
-    CampoPreencher: TMemo;
     MainMenu1: TMainMenu;
     Arquivo1: TMenuItem;
     Arquivo2: TMenuItem;
@@ -20,6 +19,7 @@ type
     SaveDialog1: TSaveDialog;
     OpenDialog1: TOpenDialog;
     Salvar1: TMenuItem;
+    CampoPreencher: TMemo;
     procedure Ajuda2Click(Sender: TObject);
     procedure SalvarArquivo2Click(Sender: TObject);
     procedure SalvarArquivo1Click(Sender: TObject);

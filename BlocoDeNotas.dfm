@@ -14,7 +14,7 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainMenu1
-  WindowState = wsMinimized
+  WindowState = wsMaximized
   TextHeight = 15
   object CampoPreencher: TMemo
     Left = 0
@@ -22,10 +22,13 @@ object Form1: TForm1
     Width = 735
     Height = 545
     Align = alClient
-    Color = clWhite
+    Lines.Strings = (
+      '')
     TabOrder = 0
-    ExplicitWidth = 733
-    ExplicitHeight = 537
+    ExplicitLeft = 232
+    ExplicitTop = 144
+    ExplicitWidth = 185
+    ExplicitHeight = 89
   end
   object MainMenu1: TMainMenu
     Left = 496
