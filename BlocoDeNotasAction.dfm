@@ -23,9 +23,8 @@ object BlocoDeNotas: TBlocoDeNotas
     PopupMenu = PopupMenu1
     TabOrder = 0
     OnChange = CampoEscreverChange
-    ExplicitTop = -6
-    ExplicitWidth = 624
-    ExplicitHeight = 422
+    ExplicitWidth = 863
+    ExplicitHeight = 519
   end
   object BarraDeStatus: TStatusBar
     Left = 0
@@ -38,8 +37,8 @@ object BlocoDeNotas: TBlocoDeNotas
     ParentBiDiMode = False
     SimplePanel = True
     SimpleText = #9#9
-    ExplicitTop = 422
-    ExplicitWidth = 624
+    ExplicitTop = 519
+    ExplicitWidth = 863
   end
   object MainMenu1: TMainMenu
     Left = 424

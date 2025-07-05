@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2025/07/03 11:37:44.000.861,=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/07/03 11:38:50.000.844,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\BlocoDeNotas.dfm=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2025/07/03 11:38:50.000.844,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\BlocoDeNotas.pas=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/07/03 11:39:27.000.878,C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\BlocoDeNotas\ProjectBlocoDeNotas.dproj=C:\Users\ipneu\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-  </Transactions>
-</BorlandProject>
