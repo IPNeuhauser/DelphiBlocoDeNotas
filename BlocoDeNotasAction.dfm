@@ -3,8 +3,8 @@ object BlocoDeNotas: TBlocoDeNotas
   Top = 0
   Align = alClient
   Caption = 'Bloco de Notas'
-  ClientHeight = 546
-  ClientWidth = 865
+  ClientHeight = 486
+  ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,20 +16,19 @@ object BlocoDeNotas: TBlocoDeNotas
   object CampoEscrever: TMemo
     Left = 0
     Top = 0
-    Width = 865
-    Height = 527
+    Width = 737
+    Height = 467
     Cursor = crIBeam
     Align = alClient
     PopupMenu = PopupMenu1
     TabOrder = 0
-    OnChange = CampoEscreverChange
-    ExplicitWidth = 863
-    ExplicitHeight = 519
+    ExplicitLeft = 8
+    ExplicitTop = 11
   end
   object BarraDeStatus: TStatusBar
     Left = 0
-    Top = 527
-    Width = 865
+    Top = 467
+    Width = 737
     Height = 19
     BiDiMode = bdLeftToRight
     Color = clScrollBar
@@ -37,8 +36,8 @@ object BlocoDeNotas: TBlocoDeNotas
     ParentBiDiMode = False
     SimplePanel = True
     SimpleText = #9#9
-    ExplicitTop = 519
-    ExplicitWidth = 863
+    ExplicitTop = 459
+    ExplicitWidth = 735
   end
   object MainMenu1: TMainMenu
     Left = 424
@@ -194,17 +193,5 @@ object BlocoDeNotas: TBlocoDeNotas
     object popRecortar: TMenuItem
       Action = Recortar
     end
-  end
-  object SaveDialog: TSaveDialog
-    DefaultExt = 'txt'
-    Filter = 'Text files (*.txt)|*.txt|All files (*.*)|*.*'
-    Left = 344
-    Top = 192
-  end
-  object OpenDialog: TOpenDialog
-    DefaultExt = 'txt'
-    Filter = 'Text file (*.txt)|*.txt|All files (*.*)|*.*'
-    Left = 416
-    Top = 192
   end
 end

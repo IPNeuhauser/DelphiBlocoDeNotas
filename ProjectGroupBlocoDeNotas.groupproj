@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{49A30FBA-E978-43DC-9EAA-052F677452CE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="pkBlocoDeNotas.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="pkBlocoDeNotas">
+        <MSBuild Projects="pkBlocoDeNotas.dproj"/>
+    </Target>
+    <Target Name="pkBlocoDeNotas:Clean">
+        <MSBuild Projects="pkBlocoDeNotas.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pkBlocoDeNotas:Make">
+        <MSBuild Projects="pkBlocoDeNotas.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectBlocoDeNotasAction">
+        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj"/>
+    </Target>
+    <Target Name="ProjectBlocoDeNotasAction:Clean">
+        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectBlocoDeNotasAction:Make">
+        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="pkBlocoDeNotas;ProjectBlocoDeNotasAction"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="pkBlocoDeNotas:Clean;ProjectBlocoDeNotasAction:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="pkBlocoDeNotas:Make;ProjectBlocoDeNotasAction:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

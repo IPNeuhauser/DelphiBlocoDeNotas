@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdActns, Vcl.ActnList,
-  System.Actions, Vcl.Menus, Vcl.ComCtrls, Vcl.Clipbrd, Vcl.StdCtrls;
+  System.Actions, Vcl.Menus, Vcl.ComCtrls, Vcl.Clipbrd, Vcl.StdCtrls, uArquivo, uEditar, uSobre;
 
 type
   TBlocoDeNotas = class(TForm)
@@ -44,21 +44,15 @@ type
     Deletar: TAction;
     SelecionarTudo: TAction;
     mSelecionarTudo: TMenuItem;
-    SaveDialog: TSaveDialog;
-    OpenDialog: TOpenDialog;
     N1: TMenuItem;
     N2: TMenuItem;
     N3: TMenuItem;
     Sobre1: TMenuItem;
-    procedure CampoEscreverChange(Sender: TObject);
     procedure CopiarExecute(Sender: TObject);
     procedure RecortarExecute(Sender: TObject);
     procedure SelecionarTudoExecute(Sender: TObject);
     procedure FecharArquivoHint(var HintStr: string; var CanShow: Boolean);
     procedure NovoArquivoExecute(Sender: TObject);
-    procedure SalvarArquivoExecute(Sender: TObject);
-    procedure SalvarArquivoComoExecute(Sender: TObject);
-    procedure AbrirArquivoExecute(Sender: TObject);
     procedure DesfazerExecute(Sender: TObject);
     procedure VerBarraDeStatusExecute(Sender: TObject);
     procedure ColarExecute(Sender: TObject);
@@ -66,8 +60,13 @@ type
     procedure EditarClick(Sender: TObject);
     procedure mDeletarClick(Sender: TObject);
     procedure Sobre1Click(Sender: TObject);
+    procedure SalvarArquivoComoExecute(Sender: TObject);
+    procedure SalvarArquivoExecute(Sender: TObject);
+    procedure AbrirArquivoExecute(Sender: TObject);
   private
     { Private declarations }
+    FArquivo : TArquivo;
+    FEditar : TEditar;
 
   public
     { Public declarations }
@@ -75,39 +74,24 @@ type
 
 var
   BlocoDeNotas: TBlocoDeNotas;
-  NomeDoArquivo: String;
 
 implementation
 
 {$R *.dfm}
 
-
 procedure TBlocoDeNotas.SalvarArquivoComoExecute(Sender: TObject);
 begin
-  if SaveDialog.Execute then
-  Begin
-    NomeDoArquivo := SaveDialog.FileName;
-    CampoEscrever.lines.SaveToFile(NomeDoArquivo);
-    BlocoDeNotas.Caption := ExtractFileName(NomeDoArquivo) + ' - Bloco de Notas';
-
-  End;
+  FArquivo.SalvarArquivoComo(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.SalvarArquivoExecute(Sender: TObject);
 begin
-  if NomeDoArquivo = '' then
-  Begin
-   SalvarArquivoComo.Execute
-  End Else
-  Begin
-    CampoEscrever.Lines.SaveToFile(NomeDoArquivo);
-  End;
-
+  FArquivo.SalvarArquivo(CampoEscrever, FArquivo.NomeArquivo);
 end;
 
 procedure TBlocoDeNotas.SelecionarTudoExecute(Sender: TObject);
 begin
-  CampoEscrever.SelectAll;
+  FEditar.SelecionarTudo(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.Sobre1Click(Sender: TObject);
@@ -116,69 +100,57 @@ begin
 end;
 
 procedure TBlocoDeNotas.VerBarraDeStatusExecute(Sender: TObject);
+var
+FSobre : TSobre;
 begin
-  BarraDeStatus.Visible := not BarraDeStatus.Visible;
-  VerBarraDeStatus.Checked := not VerBarraDeStatus.Checked;
+  FSobre.BarraStatus(VerBarraDeStatus, BarraDeStatus);
 end;
 
 procedure TBlocoDeNotas.AbrirArquivoExecute(Sender: TObject);
 begin
-  if OpenDialog.Execute then
-  begin
-    NomeDoArquivo := OpenDialog.FileName;
-    CampoEscrever.lines.LoadFromFile(NomeDoArquivo);
-    BlocoDeNotas.Caption := ExtractFileName(NomeDoArquivo) + ' - Bloco de Notas';
-  end;
-end;
-
-procedure TBlocoDeNotas.CampoEscreverChange(Sender: TObject);
-begin
-
-  BarraDeStatus.SimpleText := IntToStr(CampoEscrever.Lines.Count) + ' lines';
-
+  FArquivo.AbrirArquivo(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.ColarExecute(Sender: TObject);
 begin
-  CampoEscrever.PasteFromClipboard;
+  FEditar.Colar(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.CopiarExecute(Sender: TObject);
 begin
-  CampoEscrever.CopyToClipboard;
+  FEditar.Copiar(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.mDeletarClick(Sender: TObject);
 begin
-  CampoEscrever.SetSelText('');
+  FEditar.Deletar(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.DesfazerExecute(Sender: TObject);
 begin
-  CampoEscrever.Undo;
+  FEditar.Desfazer(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.EditarClick(Sender: TObject);
 begin
-  Copiar.Enabled := CampoEscrever.SelLength <> 0;
+  Copiar.Enabled := FEditar.isEnable(CampoEscrever);
   Recortar.Enabled := CampoEscrever.SelLength <> 0;
-  Colar.Enabled := Clipboard.AsText <> '';
+  Colar.Enabled := FEditar.isEnable();
   SelecionarTudo.Enabled := CampoEscrever.SelLength <> Length(CampoEscrever.Lines.Text);
   Desfazer.Enabled := CampoEscrever.CanUndo;
   Deletar.Enabled := True;
-
 end;
 
 procedure TBlocoDeNotas.FecharArquivoHint(var HintStr: string;
   var CanShow: Boolean);
 begin
+  FArquivo.Free;
   Application.Terminate;
 end;
 
 procedure TBlocoDeNotas.NovoArquivoExecute(Sender: TObject);
 begin
-  NomeDoArquivo := '';
-  CampoEscrever.lines.Clear;
+  FArquivo.NovoArquivo(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.PopupMenuPopup(Sender: TObject);
@@ -190,7 +162,7 @@ end;
 
 procedure TBlocoDeNotas.RecortarExecute(Sender: TObject);
 begin
-  CampoEscrever.CutToClipboard;
+  FEditar.Cortar(CampoEscrever);
 end;
 
 end.
