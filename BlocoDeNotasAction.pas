@@ -63,10 +63,12 @@ type
     procedure SalvarArquivoComoExecute(Sender: TObject);
     procedure SalvarArquivoExecute(Sender: TObject);
     procedure AbrirArquivoExecute(Sender: TObject);
+    procedure CampoEscreverChange(Sender: TObject);
   private
     { Private declarations }
     FArquivo : TArquivo;
     FEditar : TEditar;
+    FSobre : TSobre;
 
   public
     { Public declarations }
@@ -81,12 +83,22 @@ implementation
 
 procedure TBlocoDeNotas.SalvarArquivoComoExecute(Sender: TObject);
 begin
+  if not assigned(FArquivo) then
+  Begin
+    FArquivo := TArquivo.create();
+  End;
   FArquivo.SalvarArquivoComo(CampoEscrever);
+  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
 end;
 
 procedure TBlocoDeNotas.SalvarArquivoExecute(Sender: TObject);
 begin
+  if not assigned(FArquivo) then
+  Begin
+    FArquivo := TArquivo.create();
+  End;
   FArquivo.SalvarArquivo(CampoEscrever, FArquivo.NomeArquivo);
+  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
 end;
 
 procedure TBlocoDeNotas.SelecionarTudoExecute(Sender: TObject);
@@ -100,15 +112,33 @@ begin
 end;
 
 procedure TBlocoDeNotas.VerBarraDeStatusExecute(Sender: TObject);
-var
-FSobre : TSobre;
 begin
+  if not assigned(FSobre) then
+  Begin
+    FSobre := TSobre.create;
+  End;
+
   FSobre.BarraStatus(VerBarraDeStatus, BarraDeStatus);
 end;
 
 procedure TBlocoDeNotas.AbrirArquivoExecute(Sender: TObject);
 begin
+  if not assigned(FArquivo) then
+  Begin
+    FArquivo := TArquivo.create();
+  End;
   FArquivo.AbrirArquivo(CampoEscrever);
+  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
+end;
+
+procedure TBlocoDeNotas.CampoEscreverChange(Sender: TObject);
+begin
+  if not assigned(FSobre) then
+  Begin
+    FSobre := TSobre.create;
+  End;
+
+  FSobre.AtualizarBarra(CampoEscrever, BarraDeStatus);
 end;
 
 procedure TBlocoDeNotas.ColarExecute(Sender: TObject);
@@ -134,15 +164,15 @@ end;
 procedure TBlocoDeNotas.EditarClick(Sender: TObject);
 begin
   Copiar.Enabled := FEditar.isEnable(CampoEscrever);
-  Recortar.Enabled := CampoEscrever.SelLength <> 0;
+  Recortar.Enabled := FEditar.isEnable(CampoEscrever);
   Colar.Enabled := FEditar.isEnable();
-  SelecionarTudo.Enabled := CampoEscrever.SelLength <> Length(CampoEscrever.Lines.Text);
+  SelecionarTudo.Enabled := True;
   Desfazer.Enabled := CampoEscrever.CanUndo;
   Deletar.Enabled := True;
 end;
 
 procedure TBlocoDeNotas.FecharArquivoHint(var HintStr: string;
-  var CanShow: Boolean);
+var CanShow: Boolean);
 begin
   FArquivo.Free;
   Application.Terminate;
@@ -151,13 +181,14 @@ end;
 procedure TBlocoDeNotas.NovoArquivoExecute(Sender: TObject);
 begin
   FArquivo.NovoArquivo(CampoEscrever);
+  BlocoDeNotas.Caption := ('Bloco de Notas');
 end;
 
 procedure TBlocoDeNotas.PopupMenuPopup(Sender: TObject);
 begin
-  popCopiar.Enabled := CampoEscrever.SelLength <> 0;
-  popColar.Enabled := Clipboard.AsText <> '';
-  popRecortar.Enabled := CampoEscrever.SelLength <> 0;
+  popCopiar.Enabled := FEditar.isEnable(CampoEscrever);
+  popColar.Enabled := FEditar.isEnable();
+  popRecortar.Enabled := FEditar.isEnable(CampoEscrever);
 end;
 
 procedure TBlocoDeNotas.RecortarExecute(Sender: TObject);

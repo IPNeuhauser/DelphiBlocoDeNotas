@@ -2,9 +2,7 @@ program ProjectBlocoDeNotasAction;
 
 uses
   Vcl.Forms,
-  BlocoDeNotasAction in 'BlocoDeNotasAction.pas' {BlocoDeNotas},
-  uArquivo in 'uArquivo.pas',
-  uEditor in 'uEditor.pas';
+  BlocoDeNotasAction in 'BlocoDeNotasAction.pas' {BlocoDeNotas};
 
 {$R *.res}
 

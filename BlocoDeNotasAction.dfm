@@ -3,7 +3,7 @@ object BlocoDeNotas: TBlocoDeNotas
   Top = 0
   Align = alClient
   Caption = 'Bloco de Notas'
-  ClientHeight = 486
+  ClientHeight = 485
   ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,27 +17,28 @@ object BlocoDeNotas: TBlocoDeNotas
     Left = 0
     Top = 0
     Width = 737
-    Height = 467
+    Height = 460
     Cursor = crIBeam
     Align = alClient
     PopupMenu = PopupMenu1
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 11
+    OnChange = CampoEscreverChange
+    ExplicitLeft = -3
+    ExplicitTop = -3
   end
   object BarraDeStatus: TStatusBar
-    Left = 0
-    Top = 467
-    Width = 737
+    AlignWithMargins = True
+    Left = 10
+    Top = 463
+    Width = 724
     Height = 19
+    Margins.Left = 10
     BiDiMode = bdLeftToRight
     Color = clScrollBar
     Panels = <>
     ParentBiDiMode = False
     SimplePanel = True
     SimpleText = #9#9
-    ExplicitTop = 459
-    ExplicitWidth = 735
   end
   object MainMenu1: TMainMenu
     Left = 424

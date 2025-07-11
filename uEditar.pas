@@ -52,19 +52,8 @@ end;
 
 function TEditar.isEnable(AOwner: TMemo): Boolean;
 begin
-    if AOwner.SelLength <> Length(AOwner.lines.Text) then
-  begin
-    Result := True;
-    exit;
-  end;
 
   if AOwner.SelLength <> 0 then
-  begin
-    Result := True;
-    exit;
-  end;
-
-  if AOwner.CanUndo then
   begin
     Result := True;
     exit;

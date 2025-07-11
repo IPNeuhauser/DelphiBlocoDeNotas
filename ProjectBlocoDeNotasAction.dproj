@@ -127,8 +127,6 @@
             <Form>BlocoDeNotas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uArquivo.pas"/>
-        <DCCReference Include="uEditor.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

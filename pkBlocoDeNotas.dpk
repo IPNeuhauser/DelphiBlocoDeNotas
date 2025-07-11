@@ -30,4 +30,9 @@ package pkBlocoDeNotas;
 requires
   rtl;
 
+contains
+  uArquivo in 'uArquivo.pas',
+  uEditar in 'uEditar.pas',
+  uSobre in 'uSobre.pas';
+
 end.

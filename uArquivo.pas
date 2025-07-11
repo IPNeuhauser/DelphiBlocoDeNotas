@@ -2,23 +2,27 @@ unit uArquivo;
 
 interface
 uses
-  Vcl.Dialogs, Vcl.StdCtrls, System.Classes;
+  Vcl.Dialogs, Vcl.StdCtrls, System.Classes, System.SysUtils;
 
 type
  TArquivo = class
  private
   FNomeArquivo : string;
-  function GetName: string;
-  procedure SetName(const Value: string);
+  function GetNomeArquivo: string;
+  procedure SetNomeArquivo(const Value: string);
  public
+  constructor Create();
+  destructor Free();
   procedure SalvarArquivoComo(AOwner : TMemo);
   procedure SalvarArquivo(AOwner: TMemo; Title: string);
   function AbrirArquivo(AOwner: TMemo): TMemo;
   procedure NovoArquivo(AOwner : TMemo);
-
  published
-  property NomeArquivo : string read GetName write SetName;
+  property NomeArquivo: string read GetNomeArquivo write SetNomeArquivo;
  end;
+
+ var
+ FArquivo: TArquivo;
 
 implementation
 
@@ -26,13 +30,13 @@ implementation
 
 procedure TArquivo.SalvarArquivo(AOwner: TMemo; Title: string);
 begin
-   if Title <> '' then
-  Begin
-   SalvarArquivoComo(AOwner);
-  End Else
-  Begin
+  if Title = 'Sem Título' then
+  begin
+    SalvarArquivoComo(AOwner);
+  end Else
+  begin
     AOwner.Lines.SaveToFile(Title);
-  End;
+  end;
 end;
 
 procedure TArquivo.SalvarArquivoComo(AOwner: TMemo);
@@ -47,15 +51,15 @@ begin
 
     if SaveDialog.Execute then
     Begin
-      SetName(SaveDialog.FileName);
-      Aowner.Lines.SaveToFile(NomeArquivo);
+      SetNomeArquivo(SaveDialog.FileName);
+      Aowner.Lines.SaveToFile(SaveDialog.FileName);
     End;
   finally
     SaveDialog.Free;
   end;
 end;
 
-procedure TArquivo.SetName(const Value: string);
+procedure TArquivo.SetNomeArquivo(const Value: string);
 begin
   FNomeArquivo := Value;
 end;
@@ -64,9 +68,9 @@ end;
 
 function TArquivo.AbrirArquivo(AOwner: TMemo): TMemo;
 var
-  OpenDialog : TOpenDialog;
+  OpenDialog: TOpenDialog;
 begin
-  OpenDialog.create(AOwner);
+  OpenDialog := TOpenDialog.create(AOwner);
   Try
     OpenDialog.Title := 'Abrir Arquivo';
     OpenDialog.Filter := 'Arquivo de Texto (*.txt)|*.txt|Todos os Arquivos (*.*)|*.*';;
@@ -74,25 +78,32 @@ begin
 
     if  OpenDialog.Execute then
     Begin
-      SetName(OpenDialog.FileName);
+      SetNomeArquivo(OpenDialog.FileName);
       AOwner.lines.LoadFromFile(OpenDialog.FileName);
     End;
 
   Finally
-    Result := AOwner;
     OpenDialog.free;
   End;
-
 end;
 
-function TArquivo.GetName: string;
+constructor TArquivo.Create;
 begin
-  NomeArquivo := FNomeArquivo;
+  FNomeArquivo := 'Sem Título';
+end;
+
+destructor TArquivo.Free;
+begin
+  FNomeArquivo := '';
+end;
+
+function TArquivo.GetNomeArquivo: string;
+begin
+  Result := FNomeArquivo;
 end;
 
 procedure TArquivo.NovoArquivo(AOwner: TMemo);
 begin
-  SetName('');
   AOwner.Lines.Clear;
 end;
 

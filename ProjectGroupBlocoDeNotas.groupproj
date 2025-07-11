@@ -6,7 +6,7 @@
         <Projects Include="pkBlocoDeNotas.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj">
+        <Projects Include="ProjectBlocoDeNotasAction.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -27,13 +27,13 @@
         <MSBuild Projects="pkBlocoDeNotas.dproj" Targets="Make"/>
     </Target>
     <Target Name="ProjectBlocoDeNotasAction">
-        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj"/>
+        <MSBuild Projects="ProjectBlocoDeNotasAction.dproj"/>
     </Target>
     <Target Name="ProjectBlocoDeNotasAction:Clean">
-        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj" Targets="Clean"/>
+        <MSBuild Projects="ProjectBlocoDeNotasAction.dproj" Targets="Clean"/>
     </Target>
     <Target Name="ProjectBlocoDeNotasAction:Make">
-        <MSBuild Projects="BlocoDeNotas\ProjectBlocoDeNotasAction.dproj" Targets="Make"/>
+        <MSBuild Projects="ProjectBlocoDeNotasAction.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="pkBlocoDeNotas;ProjectBlocoDeNotasAction"/>
