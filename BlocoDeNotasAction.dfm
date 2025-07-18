@@ -1,9 +1,9 @@
-object BlocoDeNotas: TBlocoDeNotas
+object frmBlocoDeNotas: TfrmBlocoDeNotas
   Left = 0
   Top = 0
   Align = alClient
   Caption = 'Bloco de Notas'
-  ClientHeight = 485
+  ClientHeight = 484
   ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,25 +11,25 @@ object BlocoDeNotas: TBlocoDeNotas
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = menuPrincipal
   TextHeight = 15
-  object CampoEscrever: TMemo
+  object mmCampoEscrever: TMemo
     Left = 0
     Top = 0
     Width = 737
-    Height = 460
+    Height = 459
     Cursor = crIBeam
     Align = alClient
-    PopupMenu = PopupMenu1
+    PopupMenu = popMenu
     TabOrder = 0
-    OnChange = CampoEscreverChange
-    ExplicitLeft = -3
-    ExplicitTop = -3
+    OnChange = mmCampoEscreverChange
+    ExplicitWidth = 735
+    ExplicitHeight = 452
   end
-  object BarraDeStatus: TStatusBar
+  object StatusBar: TStatusBar
     AlignWithMargins = True
     Left = 10
-    Top = 463
+    Top = 462
     Width = 724
     Height = 19
     Margins.Left = 10
@@ -39,160 +39,162 @@ object BlocoDeNotas: TBlocoDeNotas
     ParentBiDiMode = False
     SimplePanel = True
     SimpleText = #9#9
+    ExplicitLeft = 5
+    ExplicitTop = 466
   end
-  object MainMenu1: TMainMenu
+  object menuPrincipal: TMainMenu
     Left = 424
     Top = 112
-    object Arquivo1: TMenuItem
+    object moArquivo: TMenuItem
       Caption = 'Arquivo'
-      object Arquivo2: TMenuItem
-        Action = NovoArquivo
+      object moSubNovoArquivo: TMenuItem
+        Action = actNovoArquivo
       end
-      object AbrirArquivo1: TMenuItem
-        Action = AbrirArquivo
+      object moSubAbrirArquivo: TMenuItem
+        Action = actAbrirArquivo
       end
-      object AbrirArquivo2: TMenuItem
-        Action = SalvarArquivo
+      object moSubSalvar: TMenuItem
+        Action = actSalvarArquivo
       end
-      object SalvarArquivoComo1: TMenuItem
-        Action = SalvarArquivoComo
+      object moSubSalvarArquivoComo: TMenuItem
+        Action = actSalvarArquivoComo
       end
       object N3: TMenuItem
         Caption = '-'
       end
-      object SalvarArquivoComo2: TMenuItem
-        Action = FecharArquivo
+      object moSubFecharArquivo: TMenuItem
+        Action = actFecharArquivo
       end
     end
-    object Editar: TMenuItem
+    object moEditar: TMenuItem
       Caption = 'Editar'
-      OnClick = EditarClick
-      object mDesfazer: TMenuItem
-        Action = Desfazer
+      OnClick = moEditarClick
+      object moSubDesfazer: TMenuItem
+        Action = actDesfazer
       end
       object N1: TMenuItem
         Caption = '-'
       end
-      object mCopiar: TMenuItem
-        Action = Copiar
+      object moSubCopiar: TMenuItem
+        Action = actCopiar
       end
-      object mColar: TMenuItem
-        Action = Colar
+      object moSubColar: TMenuItem
+        Action = actColar
       end
-      object mRecortar: TMenuItem
-        Action = Recortar
+      object moSubRecortar: TMenuItem
+        Action = actRecortar
       end
-      object mDeletar: TMenuItem
-        Action = Deletar
-        OnClick = mDeletarClick
+      object moSubDeletar: TMenuItem
+        Action = actDeletar
+        OnClick = moSubDeletarClick
       end
       object N2: TMenuItem
         Caption = '-'
       end
-      object mSelecionarTudo: TMenuItem
-        Action = SelecionarTudo
+      object moSubSelecionarTudo: TMenuItem
+        Action = actSelecionarTudo
       end
     end
-    object Exibir1: TMenuItem
+    object moExibir: TMenuItem
       Caption = 'Exibir'
-      object Exibir2: TMenuItem
-        Action = VerBarraDeStatus
+      object moSubBarraDeStatus: TMenuItem
+        Action = actVerBarraDeStatus
       end
-      object Sobre1: TMenuItem
+      object moSubSobre: TMenuItem
         Caption = 'Sobre'
-        OnClick = Sobre1Click
+        OnClick = moSubSobreClick
       end
     end
   end
-  object ActionList1: TActionList
+  object actListMenu: TActionList
     Left = 504
     Top = 112
-    object NovoArquivo: TAction
+    object actNovoArquivo: TAction
       Category = 'Arquivo'
       Caption = '&Novo Arquivo'
       ShortCut = 16462
-      OnExecute = NovoArquivoExecute
+      OnExecute = actNovoArquivoExecute
     end
-    object SalvarArquivo: TAction
+    object actSalvarArquivo: TAction
       Category = 'Arquivo'
       Caption = '&Salvar'
       ShortCut = 16467
-      OnExecute = SalvarArquivoExecute
+      OnExecute = actSalvarArquivoExecute
     end
-    object FecharArquivo: TFileExit
+    object actFecharArquivo: TFileExit
       Category = 'Arquivo'
       Caption = 'Fechar Arquivo'
       Hint = 'Exit|Quits the application'
       ImageIndex = 43
       ShortCut = 16471
-      OnHint = FecharArquivoHint
+      OnHint = actFecharArquivoHint
     end
-    object VerBarraDeStatus: TAction
+    object actVerBarraDeStatus: TAction
       Category = 'Exibir'
       Caption = 'Barra de Status'
       Checked = True
-      OnExecute = VerBarraDeStatusExecute
+      OnExecute = actVerBarraDeStatusExecute
     end
-    object AbrirArquivo: TAction
+    object actAbrirArquivo: TAction
       Category = 'Arquivo'
       Caption = 'Abrir Arquiv&o'
       ShortCut = 16463
-      OnExecute = AbrirArquivoExecute
+      OnExecute = actAbrirArquivoExecute
     end
-    object SalvarArquivoComo: TAction
+    object actSalvarArquivoComo: TAction
       Category = 'Arquivo'
       Caption = 'Salvar Como...'
       ShortCut = 24659
-      OnExecute = SalvarArquivoComoExecute
+      OnExecute = actSalvarArquivoComoExecute
     end
-    object Copiar: TAction
+    object actCopiar: TAction
       Category = 'Editar'
       Caption = '&Copiar'
       ShortCut = 16451
-      OnExecute = CopiarExecute
+      OnExecute = actCopiarExecute
     end
-    object Colar: TAction
+    object actColar: TAction
       Category = 'Editar'
       Caption = 'Colar'
       ShortCut = 16470
-      OnExecute = ColarExecute
+      OnExecute = actColarExecute
     end
-    object Recortar: TAction
+    object actRecortar: TAction
       Category = 'Editar'
       Caption = 'Recortar'
       ShortCut = 16472
-      OnExecute = RecortarExecute
+      OnExecute = actRecortarExecute
     end
-    object Desfazer: TAction
+    object actDesfazer: TAction
       Category = 'Editar'
       Caption = 'Desfa&zer'
       ShortCut = 16474
-      OnExecute = DesfazerExecute
+      OnExecute = actDesfazerExecute
     end
-    object Deletar: TAction
+    object actDeletar: TAction
       Category = 'Editar'
       Caption = '&Deletar'
       ShortCut = 46
     end
-    object SelecionarTudo: TAction
+    object actSelecionarTudo: TAction
       Category = 'Editar'
       Caption = 'Selecionar Tudo'
       ShortCut = 16449
-      OnExecute = SelecionarTudoExecute
+      OnExecute = actSelecionarTudoExecute
     end
   end
-  object PopupMenu1: TPopupMenu
+  object popMenu: TPopupMenu
     OnPopup = PopupMenuPopup
     Left = 344
     Top = 112
     object popCopiar: TMenuItem
-      Action = Copiar
+      Action = actCopiar
     end
     object popColar: TMenuItem
-      Action = Colar
+      Action = actColar
     end
     object popRecortar: TMenuItem
-      Action = Recortar
+      Action = actRecortar
     end
   end
 end

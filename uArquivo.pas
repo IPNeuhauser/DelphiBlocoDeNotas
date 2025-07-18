@@ -9,13 +9,13 @@ type
  private
   FNomeArquivo : string;
   function GetNomeArquivo: string;
-  procedure SetNomeArquivo(const Value: string);
+  procedure SetNomeArquivo(const AValue: string);
  public
   constructor Create();
   destructor Free();
   procedure SalvarArquivoComo(AOwner : TMemo);
-  procedure SalvarArquivo(AOwner: TMemo; Title: string);
-  function AbrirArquivo(AOwner: TMemo): TMemo;
+  procedure SalvarArquivo(AOwner: TMemo; ATitle: string);
+  procedure AbrirArquivo(AOwner: TMemo);
   procedure NovoArquivo(AOwner : TMemo);
  published
   property NomeArquivo: string read GetNomeArquivo write SetNomeArquivo;
@@ -28,62 +28,62 @@ implementation
 
 { TArquivo }
 
-procedure TArquivo.SalvarArquivo(AOwner: TMemo; Title: string);
+procedure TArquivo.SalvarArquivo(AOwner: TMemo; ATitle: string);
 begin
-  if Title = 'Sem Título' then
+  if ATitle = 'Sem Título' then
   begin
     SalvarArquivoComo(AOwner);
   end Else
   begin
-    AOwner.Lines.SaveToFile(Title);
+    AOwner.Lines.SaveToFile(ATitle);
   end;
 end;
 
 procedure TArquivo.SalvarArquivoComo(AOwner: TMemo);
 var
- SaveDialog : TSaveDialog;
+ LSaveDialog : TSaveDialog;
 begin
-  SaveDialog := TSaveDialog.create(AOwner);
+  LSaveDialog := TSaveDialog.create(AOwner);
   try
-    SaveDialog.Title := 'Salvar Arquivo';
-    SaveDialog.Filter := 'Arquivo de Texto (*.txt)|*.txt|Todos os Arquivos (*.*)|*.*';;
-    SaveDialog.DefaultExt := 'txt';
+    LSaveDialog.Title := 'Salvar Arquivo';
+    LSaveDialog.Filter := 'Arquivo de Texto (*.txt)|*.txt|Todos os Arquivos (*.*)|*.*';;
+    LSaveDialog.DefaultExt := 'txt';
 
-    if SaveDialog.Execute then
+    if LSaveDialog.Execute then
     Begin
-      SetNomeArquivo(SaveDialog.FileName);
-      Aowner.Lines.SaveToFile(SaveDialog.FileName);
+      SetNomeArquivo(LSaveDialog.FileName);
+      Aowner.Lines.SaveToFile(LSaveDialog.FileName);
     End;
   finally
-    SaveDialog.Free;
+    LSaveDialog.Free;
   end;
 end;
 
-procedure TArquivo.SetNomeArquivo(const Value: string);
+procedure TArquivo.SetNomeArquivo(const AValue: string);
 begin
-  FNomeArquivo := Value;
+  FNomeArquivo := AValue;
 end;
 
 { TArquivo }
 
-function TArquivo.AbrirArquivo(AOwner: TMemo): TMemo;
+procedure TArquivo.AbrirArquivo(AOwner: TMemo);
 var
-  OpenDialog: TOpenDialog;
+  LOpenDialog: TOpenDialog;
 begin
-  OpenDialog := TOpenDialog.create(AOwner);
+  LOpenDialog := TOpenDialog.create(AOwner);
   Try
-    OpenDialog.Title := 'Abrir Arquivo';
-    OpenDialog.Filter := 'Arquivo de Texto (*.txt)|*.txt|Todos os Arquivos (*.*)|*.*';;
-    OpenDialog.DefaultExt := 'txt';
+    LOpenDialog.Title := 'Abrir Arquivo';
+    LOpenDialog.Filter := 'Arquivo de Texto (*.txt)|*.txt|Todos os Arquivos (*.*)|*.*';;
+    LOpenDialog.DefaultExt := 'txt';
 
-    if  OpenDialog.Execute then
+    if  LOpenDialog.Execute then
     Begin
-      SetNomeArquivo(OpenDialog.FileName);
-      AOwner.lines.LoadFromFile(OpenDialog.FileName);
+      SetNomeArquivo(LOpenDialog.FileName);
+      AOwner.lines.LoadFromFile(LOpenDialog.FileName);
     End;
 
   Finally
-    OpenDialog.free;
+    LOpenDialog.free;
   End;
 end;
 

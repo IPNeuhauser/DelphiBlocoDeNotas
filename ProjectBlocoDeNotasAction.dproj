@@ -124,7 +124,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="BlocoDeNotasAction.pas">
-            <Form>BlocoDeNotas</Form>
+            <Form>frmBlocoDeNotas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

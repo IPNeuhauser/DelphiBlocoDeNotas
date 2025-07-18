@@ -26,7 +26,7 @@ begin
     TotalCaracteres := TotalCaracteres + Length(AOwner.Lines[I]);
   end;
 
-  ABar.SimpleText := 'teste';
+  ABar.SimpleText := IntToStr(AOwner.Lines.Count) + ' Lines | ' +IntToStr(TotalCaracteres) + ' Caracteres';
 end;
 
 procedure TSobre.BarraStatus(AChecked: TAction; ABar: TStatusBar);

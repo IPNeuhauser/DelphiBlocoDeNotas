@@ -28,7 +28,8 @@ package pkBlocoDeNotas;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  vcl;
 
 contains
   uArquivo in 'uArquivo.pas',

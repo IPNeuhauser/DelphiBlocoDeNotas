@@ -8,62 +8,62 @@ uses
   System.Actions, Vcl.Menus, Vcl.ComCtrls, Vcl.Clipbrd, Vcl.StdCtrls, uArquivo, uEditar, uSobre;
 
 type
-  TBlocoDeNotas = class(TForm)
-    MainMenu1: TMainMenu;
-    ActionList1: TActionList;
-    FecharArquivo: TFileExit;
-    NovoArquivo: TAction;
-    SalvarArquivo: TAction;
-    VerBarraDeStatus: TAction;
-    Arquivo1: TMenuItem;
-    Arquivo2: TMenuItem;
-    AbrirArquivo1: TMenuItem;
-    AbrirArquivo2: TMenuItem;
-    SalvarArquivoComo1: TMenuItem;
-    SalvarArquivoComo2: TMenuItem;
-    Editar: TMenuItem;
-    mCopiar: TMenuItem;
-    mColar: TMenuItem;
-    mRecortar: TMenuItem;
-    mDesfazer: TMenuItem;
-    mDeletar: TMenuItem;
-    Exibir1: TMenuItem;
-    Exibir2: TMenuItem;
-    CampoEscrever: TMemo;
-    BarraDeStatus: TStatusBar;
-    PopupMenu1: TPopupMenu;
+  TfrmBlocoDeNotas = class(TForm)
+    menuPrincipal: TMainMenu;
+    actListMenu: TActionList;
+    actFecharArquivo: TFileExit;
+    actNovoArquivo: TAction;
+    actSalvarArquivo: TAction;
+    actVerBarraDeStatus: TAction;
+    moArquivo: TMenuItem;
+    moSubNovoArquivo: TMenuItem;
+    moSubAbrirArquivo: TMenuItem;
+    moSubSalvar: TMenuItem;
+    moSubSalvarArquivoComo: TMenuItem;
+    moSubFecharArquivo: TMenuItem;
+    moEditar: TMenuItem;
+    moSubCopiar: TMenuItem;
+    moSubColar: TMenuItem;
+    moSubRecortar: TMenuItem;
+    moSubDesfazer: TMenuItem;
+    moSubDeletar: TMenuItem;
+    moExibir: TMenuItem;
+    moSubBarraDeStatus: TMenuItem;
+    mmCampoEscrever: TMemo;
+    StatusBar: TStatusBar;
+    popMenu: TPopupMenu;
     popCopiar: TMenuItem;
     popColar: TMenuItem;
     popRecortar: TMenuItem;
-    AbrirArquivo: TAction;
-    SalvarArquivoComo: TAction;
-    Copiar: TAction;
-    Colar: TAction;
-    Recortar: TAction;
-    Desfazer: TAction;
-    Deletar: TAction;
-    SelecionarTudo: TAction;
-    mSelecionarTudo: TMenuItem;
+    actAbrirArquivo: TAction;
+    actSalvarArquivoComo: TAction;
+    actCopiar: TAction;
+    actColar: TAction;
+    actRecortar: TAction;
+    actDesfazer: TAction;
+    actDeletar: TAction;
+    actSelecionarTudo: TAction;
+    moSubSelecionarTudo: TMenuItem;
     N1: TMenuItem;
     N2: TMenuItem;
     N3: TMenuItem;
-    Sobre1: TMenuItem;
-    procedure CopiarExecute(Sender: TObject);
-    procedure RecortarExecute(Sender: TObject);
-    procedure SelecionarTudoExecute(Sender: TObject);
-    procedure FecharArquivoHint(var HintStr: string; var CanShow: Boolean);
-    procedure NovoArquivoExecute(Sender: TObject);
-    procedure DesfazerExecute(Sender: TObject);
-    procedure VerBarraDeStatusExecute(Sender: TObject);
-    procedure ColarExecute(Sender: TObject);
+    moSubSobre: TMenuItem;
+    procedure actCopiarExecute(Sender: TObject);
+    procedure actRecortarExecute(Sender: TObject);
+    procedure actSelecionarTudoExecute(Sender: TObject);
+    procedure actFecharArquivoHint(var HintStr: string; var CanShow: Boolean);
+    procedure actNovoArquivoExecute(Sender: TObject);
+    procedure actDesfazerExecute(Sender: TObject);
+    procedure actVerBarraDeStatusExecute(Sender: TObject);
+    procedure actColarExecute(Sender: TObject);
     procedure PopupMenuPopup(Sender: TObject);
-    procedure EditarClick(Sender: TObject);
-    procedure mDeletarClick(Sender: TObject);
-    procedure Sobre1Click(Sender: TObject);
-    procedure SalvarArquivoComoExecute(Sender: TObject);
-    procedure SalvarArquivoExecute(Sender: TObject);
-    procedure AbrirArquivoExecute(Sender: TObject);
-    procedure CampoEscreverChange(Sender: TObject);
+    procedure moEditarClick(Sender: TObject);
+    procedure moSubDeletarClick(Sender: TObject);
+    procedure moSubSobreClick(Sender: TObject);
+    procedure actSalvarArquivoComoExecute(Sender: TObject);
+    procedure actSalvarArquivoExecute(Sender: TObject);
+    procedure actAbrirArquivoExecute(Sender: TObject);
+    procedure mmCampoEscreverChange(Sender: TObject);
   private
     { Private declarations }
     FArquivo : TArquivo;
@@ -75,125 +75,125 @@ type
   end;
 
 var
-  BlocoDeNotas: TBlocoDeNotas;
+  frmBlocoDeNotas: TfrmBlocoDeNotas;
 
 implementation
 
 {$R *.dfm}
 
-procedure TBlocoDeNotas.SalvarArquivoComoExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actSalvarArquivoComoExecute(Sender: TObject);
 begin
   if not assigned(FArquivo) then
   Begin
     FArquivo := TArquivo.create();
   End;
-  FArquivo.SalvarArquivoComo(CampoEscrever);
-  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
+  FArquivo.SalvarArquivoComo(mmCampoEscrever);
+  frmBlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
 end;
 
-procedure TBlocoDeNotas.SalvarArquivoExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actSalvarArquivoExecute(Sender: TObject);
 begin
   if not assigned(FArquivo) then
   Begin
     FArquivo := TArquivo.create();
   End;
-  FArquivo.SalvarArquivo(CampoEscrever, FArquivo.NomeArquivo);
-  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
+  FArquivo.SalvarArquivo(mmCampoEscrever, FArquivo.NomeArquivo);
+  frmBlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
 end;
 
-procedure TBlocoDeNotas.SelecionarTudoExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actSelecionarTudoExecute(Sender: TObject);
 begin
-  FEditar.SelecionarTudo(CampoEscrever);
+  FEditar.SelecionarTudo(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.Sobre1Click(Sender: TObject);
+procedure TfrmBlocoDeNotas.moSubSobreClick(Sender: TObject);
 begin
   ShowMessage('Desenvolvido por Igor Neuhauser');
 end;
 
-procedure TBlocoDeNotas.VerBarraDeStatusExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actVerBarraDeStatusExecute(Sender: TObject);
 begin
   if not assigned(FSobre) then
   Begin
     FSobre := TSobre.create;
   End;
 
-  FSobre.BarraStatus(VerBarraDeStatus, BarraDeStatus);
+  FSobre.BarraStatus(actVerBarraDeStatus, StatusBar);
 end;
 
-procedure TBlocoDeNotas.AbrirArquivoExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actAbrirArquivoExecute(Sender: TObject);
 begin
   if not assigned(FArquivo) then
   Begin
     FArquivo := TArquivo.create();
   End;
-  FArquivo.AbrirArquivo(CampoEscrever);
-  BlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
+  FArquivo.AbrirArquivo(mmCampoEscrever);
+  frmBlocoDeNotas.Caption := ('Bloco de Notas - '+ExtractFileName(FArquivo.NomeArquivo));
 end;
 
-procedure TBlocoDeNotas.CampoEscreverChange(Sender: TObject);
+procedure TfrmBlocoDeNotas.mmCampoEscreverChange(Sender: TObject);
 begin
   if not assigned(FSobre) then
   Begin
     FSobre := TSobre.create;
   End;
 
-  FSobre.AtualizarBarra(CampoEscrever, BarraDeStatus);
+  FSobre.AtualizarBarra(mmCampoEscrever, StatusBar);
 end;
 
-procedure TBlocoDeNotas.ColarExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actColarExecute(Sender: TObject);
 begin
-  FEditar.Colar(CampoEscrever);
+  FEditar.Colar(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.CopiarExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actCopiarExecute(Sender: TObject);
 begin
-  FEditar.Copiar(CampoEscrever);
+  FEditar.Copiar(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.mDeletarClick(Sender: TObject);
+procedure TfrmBlocoDeNotas.moSubDeletarClick(Sender: TObject);
 begin
-  FEditar.Deletar(CampoEscrever);
+  FEditar.Deletar(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.DesfazerExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actDesfazerExecute(Sender: TObject);
 begin
-  FEditar.Desfazer(CampoEscrever);
+  FEditar.Desfazer(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.EditarClick(Sender: TObject);
+procedure TfrmBlocoDeNotas.moEditarClick(Sender: TObject);
 begin
-  Copiar.Enabled := FEditar.isEnable(CampoEscrever);
-  Recortar.Enabled := FEditar.isEnable(CampoEscrever);
-  Colar.Enabled := FEditar.isEnable();
-  SelecionarTudo.Enabled := True;
-  Desfazer.Enabled := CampoEscrever.CanUndo;
-  Deletar.Enabled := True;
+  actCopiar.Enabled := FEditar.isEnable(mmCampoEscrever);
+  actRecortar.Enabled := FEditar.isEnable(mmCampoEscrever);
+  actColar.Enabled := FEditar.isEnable();
+  actSelecionarTudo.Enabled := True;
+  actDesfazer.Enabled := mmCampoEscrever.CanUndo;
+  actDeletar.Enabled := True;
 end;
 
-procedure TBlocoDeNotas.FecharArquivoHint(var HintStr: string;
+procedure TfrmBlocoDeNotas.actFecharArquivoHint(var HintStr: string;
 var CanShow: Boolean);
 begin
   FArquivo.Free;
   Application.Terminate;
 end;
 
-procedure TBlocoDeNotas.NovoArquivoExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actNovoArquivoExecute(Sender: TObject);
 begin
-  FArquivo.NovoArquivo(CampoEscrever);
-  BlocoDeNotas.Caption := ('Bloco de Notas');
+  FArquivo.NovoArquivo(mmCampoEscrever);
+  frmBlocoDeNotas.Caption := ('Bloco de Notas');
 end;
 
-procedure TBlocoDeNotas.PopupMenuPopup(Sender: TObject);
+procedure TfrmBlocoDeNotas.PopupMenuPopup(Sender: TObject);
 begin
-  popCopiar.Enabled := FEditar.isEnable(CampoEscrever);
+  popCopiar.Enabled := FEditar.isEnable(mmCampoEscrever);
   popColar.Enabled := FEditar.isEnable();
-  popRecortar.Enabled := FEditar.isEnable(CampoEscrever);
+  popRecortar.Enabled := FEditar.isEnable(mmCampoEscrever);
 end;
 
-procedure TBlocoDeNotas.RecortarExecute(Sender: TObject);
+procedure TfrmBlocoDeNotas.actRecortarExecute(Sender: TObject);
 begin
-  FEditar.Cortar(CampoEscrever);
+  FEditar.Cortar(mmCampoEscrever);
 end;
 
 end.
